@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique Weather Dashboard</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <div class="weather-app">
+    <!-- Header -->
+    <div class="header">
+      <h1>🌤️ Weather Dashboard</h1>
+      <div class="controls">
+        <button id="modeToggle">🌙</button>
+        <button id="unitToggle">°C / °F</button>
+      </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Enter city name...">
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <!-- Search History -->
+    <div id="history" class="history"></div>
+
+    <!-- Current Weather -->
+    <div class="current-weather">
+      <h2 id="cityName">--</h2>
+      <p id="temperature">-- °C</p>
+      <p id="condition">--</p>
+      <p id="extra">Feels like -- | Wind -- km/h</p>
+      <img id="icon" src="" alt="Weather Icon">
+    </div>
+
+    <!-- Hourly Forecast -->
+    <h3>Hourly Forecast</h3>
+    <div id="hourlyForecast" class="hourly-forecast"></div>
+
+    <!-- 5-Day Forecast -->
+    <h3>5-Day Forecast</h3>
+    <div id="forecast" class="forecast"></div>
+
+    <!-- Weather Alert -->
+    <div id="alert" class="alert"></div>
+
+    <!-- Unique Features -->
+    <h3>🌟 Personalized Recommendations</h3>
+    <div id="recommendations" class="recommendations">
+      <div class="rec-card">
+        <span class="icon">🩺</span>
+        <p><b>Health:</b> <span id="healthTip">--</span></p>
+      </div>
+
+      <div class="rec-card">
+        <span class="icon">🛣️</span>
+        <p><b>Travel:</b> <span id="travelTip">--</span></p>
+      </div>
+
+      <div class="rec-card">
+        <span class="icon">🎵</span>
+        <p><b>Music:</b> <span id="musicTip">--</span></p>
+      </div>
+
+      <div class="rec-card">
+        <span class="icon">👕</span>
+        <p><b>Clothes:</b> <span id="clothesTip">--</span></p>
+      </div>
+
+      <div class="rec-card">
+        <span class="icon">💡</span>
+        <p><b>Motivation:</b> <span id="quote">--</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

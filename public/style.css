@@ -1,0 +1,125 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f4f8;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+.weather-app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box {
+  margin: 15px 0;
+}
+
+.search-box input {
+  padding: 8px;
+  width: 70%;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+}
+
+.search-box button {
+  padding: 8px 12px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.history button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  background: #2196f3;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.current-weather {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.hourly-forecast,
+.forecast {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.hourly-card,
+.forecast-day {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 100px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Recommendations Section */
+.recommendations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.rec-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.rec-card:nth-child(1) { animation-delay: 0.2s; }
+.rec-card:nth-child(2) { animation-delay: 0.4s; }
+.rec-card:nth-child(3) { animation-delay: 0.6s; }
+.rec-card:nth-child(4) { animation-delay: 0.8s; }
+.rec-card:nth-child(5) { animation-delay: 1s; }
+
+.rec-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+}
+
+.icon {
+  font-size: 28px;
+}
+
+body.dark-mode {
+  background: #222;
+  color: #eee;
+}
+
+body.dark-mode .rec-card {
+  background: #333;
+  color: #fff;
+  box-shadow: 0px 4px 12px rgba(255,255,255,0.1);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
