@@ -23,8 +23,9 @@ const quote = document.getElementById("quote");
 // ==================== Weather Fetch ====================
 async function getWeather(query) {
   try {
-    // Replace <your-live-railway-url> with your Railway service URL
-    const response = await fetch(`https://<your-live-railway-url>/api/weather?${query}&units=${units}`);
+    // Replace with your Railway live URL
+    const RAILWAY_URL = "https://dynamic-weather-dashboard-production.up.railway.app";
+    const response = await fetch(`${RAILWAY_URL}/api/weather?${query}&units=${units}`);
     const data = await response.json();
 
     if (!response.ok || !data || data.cod === "404") {
@@ -48,6 +49,7 @@ function displayWeather(data) {
   temperature.textContent = `${data.main.temp} ${units === "metric" ? "°C" : "°F"}`;
   condition.textContent = data.weather[0].description;
   icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
   document.getElementById("extra").textContent =
     `Feels like ${data.main.feels_like}°, Wind ${data.wind.speed} ${units === "metric" ? "m/s" : "mph"}`;
 
@@ -64,6 +66,7 @@ function displayForecast(forecastData) {
   hourlyDiv.innerHTML = "";
   if (!forecastData?.list) return;
 
+  // Hourly forecast
   for (let i = 0; i < 12; i++) {
     const hour = forecastData.list[i];
     if (!hour) continue;
@@ -78,6 +81,7 @@ function displayForecast(forecastData) {
     hourlyDiv.appendChild(div);
   }
 
+  // 5-day forecast
   for (let i = 0; i < forecastData.list.length; i += 8) {
     const day = forecastData.list[i];
     const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: "short" });
