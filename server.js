@@ -12,10 +12,10 @@ const PORT = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from "public" folder
-app.use(express.static(path.join(__dirname, "public")));
+// Serve static files from root folder
+app.use(express.static(__dirname));
 
-// Weather API route
+// 🌦 Weather API route
 app.get("/api/weather", async (req, res) => {
   const { city, lat, lon } = req.query;
   const apiKey = process.env.API_KEY;
@@ -23,8 +23,10 @@ app.get("/api/weather", async (req, res) => {
 
   try {
     let url;
-    if (city) url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    else if (lat && lon) url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    if (city)
+      url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+    else if (lat && lon)
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     else return res.status(400).json({ error: "City or coordinates required" });
 
     const response = await fetch(url);
@@ -40,8 +42,11 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
-// Fallback for all other routes
+// Fallback for all other routes (serve index.html)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+//  Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
