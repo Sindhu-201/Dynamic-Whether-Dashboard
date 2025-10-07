@@ -7,15 +7,17 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+
+// Railway auto-assigns PORT
+const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files from root folder
-app.use(express.static(__dirname));
+// Serve static files from root (index.html should be in project root)
+app.use(express.static(path.join(__dirname)));
 
-// 🌦 Weather API route
+// Weather API route
 app.get("/api/weather", async (req, res) => {
   const { city, lat, lon } = req.query;
   const apiKey = process.env.API_KEY;
@@ -23,10 +25,8 @@ app.get("/api/weather", async (req, res) => {
 
   try {
     let url;
-    if (city)
-      url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    else if (lat && lon)
-      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    if (city) url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+    else if (lat && lon) url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     else return res.status(400).json({ error: "City or coordinates required" });
 
     const response = await fetch(url);
@@ -42,11 +42,9 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
-// Fallback for all other routes (serve index.html)
+// Fallback for all other routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
-//  Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
